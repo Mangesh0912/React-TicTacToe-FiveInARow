@@ -1,0 +1,12 @@
+.board-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: 6.66%;
+    height: 20px;
+    font-size: 16px;
+    color: #111;
+    background-color: #fff;
+    border: 1px solid #aaa;
+  }
