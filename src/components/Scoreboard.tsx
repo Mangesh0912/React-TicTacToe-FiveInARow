@@ -52,7 +52,7 @@ class ScoreBoard extends React.Component<IScoreboardProps, IScoreboardState> {
           let storage = new LeaderBoardStorage();
 
           if(prevProps !== this.props) {
-              const {player1, player2, wonBy, loser, isDrawn} = this.props;
+              const {wonBy, loser, isDrawn} = this.props;
               if(!wonBy && !loser && !isDrawn) {
                   return;
               }
@@ -72,7 +72,7 @@ class ScoreBoard extends React.Component<IScoreboardProps, IScoreboardState> {
       render() {
 
          return (
-              <div className="ag-theme-alpine" style= { {height:'300px', width:'600px'}}>
+              <div className="ag-theme-alpine" style= { {height:'300px', width:'800px'}}>
                   <p>LeaderBoard</p>
                   <AgGridReact
                     columnDefs={this.state.columnDefs}

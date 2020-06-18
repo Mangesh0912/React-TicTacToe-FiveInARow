@@ -16,10 +16,7 @@ class LeaderBoardStorage {
 
     updateData(turnParameters: IScoreBoard): void {
           var leaderBoardArr = LeaderBoardStorage.leaderBoardMap.get("leaderBoardStorage") || [];
-          console.log("leaderboard array before is:", leaderBoardArr)
           leaderBoardArr.splice(0,0,turnParameters);
-         // leaderBoardArr.push(turnParameters);
-          console.log("Leaderboard array after is:", leaderBoardArr)
           LeaderBoardStorage.leaderBoardMap.set("leaderBoardStorage", leaderBoardArr);
     }
 

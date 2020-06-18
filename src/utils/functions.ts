@@ -1,6 +1,10 @@
 import {boardConstants} from '../common/constants'
 
-export let winnerFound = {status : false};
+let winnerFound = {status : false};
+
+export function setWinnerFoundStatus(status: boolean) {
+     winnerFound.status = status;
+}
 
 export function foundWinner() {
     return winnerFound.status;
@@ -17,6 +21,10 @@ export function areAllBoxesClicked(boxes: any[]) {
 }
 
 export function findWinner(boxes: any[], index: number) {
+
+    if(foundWinner()) {
+        return true;
+    }
 
     const rows = boardConstants.rows;
     const cols = boardConstants.cols;
@@ -36,7 +44,6 @@ export function findWinner(boxes: any[], index: number) {
     }
 
     let currVal = arr[row][col];
-    console.log("Curr val is:", currVal)
     let targetCount = boardConstants.targetCountForWinner;
     let count = 0;
     let i = row;
@@ -47,30 +54,30 @@ export function findWinner(boxes: any[], index: number) {
         count = 1;
         //scan the row( right and left)
         let rightStartIndex= j + 1;
-        let currRow = i;
+        //let currRow = i;
         let leftStartIndex = j - 1;
         while(rightStartIndex < cols) {
-              if(arr[i][rightStartIndex] == currVal) {
+              if(arr[i][rightStartIndex] === currVal) {
                   count++;
               }
               else {
                   break;
               }
-              if(count == targetCount) {
-                  winnerFound.status = true;
+              if(count === targetCount) {
+                  setWinnerFoundStatus(true);
                   return currVal;
               }
               rightStartIndex ++;
         }
         while(leftStartIndex >= 0) {
-              if(arr[i][leftStartIndex] == currVal) {
+              if(arr[i][leftStartIndex] === currVal) {
                   count++;
               }
               else {
                   break;
               }
-              if(count == targetCount) {
-                  winnerFound.status = true;
+              if(count === targetCount) {
+                  setWinnerFoundStatus(true);
                   return currVal;
               }
               leftStartIndex --;
@@ -88,7 +95,7 @@ export function findWinner(boxes: any[], index: number) {
                 break;
             }
             if(count === targetCount) {
-                winnerFound.status = true;
+                setWinnerFoundStatus(true);
                 return currVal;
             }
             topStartIndex --;
@@ -121,8 +128,8 @@ export function findWinner(boxes: any[], index: number) {
             else {
                 break;
             }
-            if(count == targetCount) {
-                winnerFound.status = true;
+            if(count === targetCount) {
+                setWinnerFoundStatus(true);
                 return currVal;
             }
             diagStartIndexTopRowLeft --;
@@ -136,8 +143,8 @@ export function findWinner(boxes: any[], index: number) {
           else {
               break;
           }
-          if(count == targetCount) {
-              winnerFound.status = true;
+          if(count === targetCount) {
+              setWinnerFoundStatus(true);
               return currVal;
           }
           diagStartIndexBottomRowLeft ++;
@@ -159,12 +166,28 @@ export function findWinner(boxes: any[], index: number) {
           else {
               break;
           }
-          if(count == targetCount) {
-              winnerFound.status = true;
+          if(count === targetCount) {
+              setWinnerFoundStatus(true);
               return currVal;
           }
           diagStartIndexTopRowRight --;
           diagStartIndexTopColRight ++;
+      }
+
+      while(diagStartIndexBottomRowRight < rows && diagStartIndexBottomColRight >= 0) {
+          if(arr[diagStartIndexBottomRowRight][diagStartIndexBottomColRight] === currVal) {
+              count ++;
+          }
+          else {
+              break;
+          }
+          if(count === targetCount) {
+              setWinnerFoundStatus(true);
+              return currVal;
+          }
+          diagStartIndexBottomRowRight ++;
+          diagStartIndexBottomColRight --;
+
       }
 
 
@@ -173,6 +196,3 @@ export function findWinner(boxes: any[], index: number) {
     return null;
 }
 
-function checkIfCountSuccedded(count: number): boolean {
-     return (count == 3) ? true : false;
-}

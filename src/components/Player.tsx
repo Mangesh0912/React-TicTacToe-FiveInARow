@@ -74,11 +74,11 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
             <fieldset> 
              {this.state.showInputPlayerNamesTextBox  === true &&
                <div className={"center"}>
-                 <label>Player 1 Enter Your Name:
-                   <input defaultValue="" type="text" value={this.state.player1} name="player1" onChange={this.handleChange} ></input>
+                 <label>Player 1 Enter Your Name: 
+                   <input  type="text" value={this.state.player1} name="player1" onChange={this.handleChange} ></input>
                  </label>
                  <br/>
-                 <label>Player 2 Enter Your Name:
+                 <label>Player 2 Enter Your Name: 
                     <input type="text" value={this.state.player2} name="player2" onChange={this.handleChange}></input>
                 </label>    
                 <br/>

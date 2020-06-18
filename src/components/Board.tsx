@@ -47,7 +47,6 @@ class Board extends React.Component<IBoardProps, IBoardState> {
       handleBoxClick(index: number): void {
   
            const boxes: any[] = this.state.boxes.slice();
-           console.log("Index is:", index)
            utils.findWinner(boxes, index);
            //stop the game if board contains winning combination
            if(utils.foundWinner() || boxes[index]) {
@@ -77,7 +76,7 @@ class Board extends React.Component<IBoardProps, IBoardState> {
                 showInputPlayerNamesTextBox: true,
                 showScoreBoard: true
             });
-            utils.winnerFound.status = false;
+            utils.setWinnerFoundStatus(false);
       }
 
       playerInformation = (data: IPlayerState)  => {
@@ -109,7 +108,6 @@ class Board extends React.Component<IBoardProps, IBoardState> {
         //Status message
         let status;
         let startNewGame = false;
-        let displayScoreBoard = true;
 
         if(winner) {
             status = `The winner is: ${winner}!`;
@@ -140,7 +138,7 @@ class Board extends React.Component<IBoardProps, IBoardState> {
                        <h2 className="board-heading">{status}</h2>
                         {boxes.map( (v, index) => {
                                 var currIndex = index;
-                                if(index % this.rows == 0) {
+                                if(index % this.rows === 0) {
                                     return <div className = "board-row">
                                             { boxes.slice(currIndex,currIndex + this.rows).map( (v, index) => {
                                                 let computedIndex = currIndex + index;
@@ -163,8 +161,7 @@ class Board extends React.Component<IBoardProps, IBoardState> {
                  </div>
 
                  }
-                     
-              
+                                 
                </div>
                </div>
 
